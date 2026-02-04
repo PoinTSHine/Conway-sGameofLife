@@ -15,6 +15,14 @@
                 <div id="grid"></div>
             </div>
             
+            <div class="grid-size">
+                <label for="rows">Rows:</label>
+                <input type="number" id="rows" min="5" max="50" value="30">
+                <label for="cols">Cols:</label>
+                <input type="number" id="cols" min="5" max="50" value="20">
+                <button id="apply-size">Apply Size</button>
+            </div>
+            
             <div class="control">
                 <button id="start">Start</button>
                 <button id="pause" disabled>Pause</button>
@@ -23,7 +31,6 @@
             
             <div class="status" id="status">Ready to start simulation</div>
         </div>
-        <script src="config.js"></script>
         <script src="script.js"></script>
     </body>
 </html>

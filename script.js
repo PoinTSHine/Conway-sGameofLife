@@ -1,5 +1,8 @@
 let gameInterval = null; // 演化定时器
 let grid = []; // 存储网格状态：true=活，false=死
+let ROWS = 30; // 网格行数
+let COLS = 20; // 网格列数
+const interval = 200; // 固定演化间隔时间（毫秒）
 
 // 更新状态显示
 function updateStatus(text) {
@@ -93,11 +96,50 @@ function updateGridDom() {
     }
 }
 
+// 获取网格大小设置
+function getGridSize() {
+    const rowsInput = document.getElementById('rows');
+    const colsInput = document.getElementById('cols');
+    
+    // 设置默认值以防输入无效
+    const newRows = Math.max(5, Math.min(50, parseInt(rowsInput.value) || 30));
+    const newCols = Math.max(5, Math.min(50, parseInt(colsInput.value) || 20));
+    
+    // 更新输入框值，确保显示的是有效的值
+    rowsInput.value = newRows;
+    colsInput.value = newCols;
+    
+    return { rows: newRows, cols: newCols };
+}
+
+// 应用网格大小
+function applyGridSize() {
+    // 停止当前模拟
+    clearInterval(gameInterval);
+    gameInterval = null;
+    
+    // 获取新的网格大小
+    const { rows, cols } = getGridSize();
+    ROWS = rows;
+    COLS = cols;
+    
+    // 重置控制按钮状态
+    const startBtn = document.getElementById('start');
+    const pauseBtn = document.getElementById('pause');
+    startBtn.disabled = false;
+    pauseBtn.disabled = true;
+    
+    // 重新初始化网格
+    initGrid();
+    updateStatus(`Grid resized to ${ROWS}x${COLS}. Ready to start simulation.`);
+}
+
 // 绑定按钮事件
 function bindEvents() {
     const startBtn = document.getElementById('start');
     const pauseBtn = document.getElementById('pause');
     const resetBtn = document.getElementById('reset');
+    const applySizeBtn = document.getElementById('apply-size');
 
     // 开始演化
     startBtn.addEventListener('click', () => {
@@ -127,6 +169,9 @@ function bindEvents() {
         initGrid();
         updateStatus('Grid reset. Ready to start simulation');
     });
+    
+    // 应用网格大小
+    applySizeBtn.addEventListener('click', applyGridSize);
 }
 
 // 页面加载初始化
