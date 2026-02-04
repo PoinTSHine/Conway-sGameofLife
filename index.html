@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Conway's Game of Life</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Conway's Game of Life</h1>
+            <p class="description">The Game of Life is a cellular automaton devised by mathematician John Conway. It demonstrates how complex patterns can emerge from simple rules.</p>
+            
+            <div class="grid-container">
+                <div id="grid"></div>
+            </div>
+            
+            <div class="control">
+                <button id="start">Start</button>
+                <button id="pause" disabled>Pause</button>
+                <button id="reset">Reset</button>
+            </div>
+            
+            <div class="status" id="status">Ready to start simulation</div>
+        </div>
+        <script src="config.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
